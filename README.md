@@ -60,8 +60,8 @@ sudo apt install ffmpeg && pip install yt-dlp
 ### Step 2 — Install the MCP server
 
 ```bash
-git clone https://github.com/marcilly/socialvision-mcp
-cd socialvision-mcp
+git clone https://github.com/yourhousemktg-ctrl/viralvision-mcp
+cd viralvision-mcp
 npm install && npm run build
 ```
 
@@ -70,7 +70,7 @@ npm install && npm run build
 Run this command to add it to your Claude Code config:
 
 ```bash
-claude mcp add socialvision-mcp node /path/to/socialvision-mcp/dist/index.js
+claude mcp add viralvision-mcp node /path/to/viralvision-mcp/dist/index.js
 ```
 
 Or add manually to `~/.claude/claude.json`:
@@ -78,9 +78,9 @@ Or add manually to `~/.claude/claude.json`:
 ```json
 {
   "mcpServers": {
-    "socialvision-mcp": {
+    "viralvision-mcp": {
       "command": "node",
-      "args": ["/path/to/socialvision-mcp/dist/index.js"]
+      "args": ["/path/to/viralvision-mcp/dist/index.js"]
     }
   }
 }
