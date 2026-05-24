@@ -1,4 +1,4 @@
-# SocialVision MCP
+# ViralVision MCP
 
 **Give Claude eyes on any social video — YouTube, Instagram, TikTok, Twitter/X, Facebook, and more.**
 
@@ -13,16 +13,15 @@ Paste any social video URL into Claude Code. Claude downloads it, extracts frame
 **No API keys needed beyond your Anthropic subscription.**
 
 ```
-You: sv_watch https://www.tiktok.com/@garyvee/video/123456789
+You: vv_watch https://www.tiktok.com/@garyvee/video/123456789
 
 Claude: [watches 47 frames across the 52-second video]
 
-"This TikTok from @garyvee opens with a question hook at 0:02:
+"This TikTok opens with a question hook at 0:02:
 'Do you know what the #1 skill for 2026 is?'
 
-The middle section (0:15-0:35) shows B-roll of his office + cuts to
-face cam. He mentions AI 6 times. The CTA at 0:48 is 'link in bio'
-pointing to a course..."
+The middle section (0:15-0:35) shows B-roll of the office + cuts to
+face cam. The CTA at 0:48 is 'link in bio' pointing to a course..."
 ```
 
 ---
@@ -31,10 +30,10 @@ pointing to a course..."
 
 | Tool | What it does | Speed |
 |---|---|---|
-| `sv_watch` | Download + extract frames from any URL. Claude sees every frame. | 10-30s |
-| `sv_info` | Get video metadata without downloading (title, views, hashtags, creator) | 2-3s |
-| `sv_transcript` | Extract captions/transcript without downloading the video | 3-5s |
-| `sv_setup` | Check your installation and see supported platforms | Instant |
+| `vv_watch` | Download + extract frames from any URL. Claude sees every frame. | 10-30s |
+| `vv_info` | Get video metadata without downloading (title, views, hashtags, creator) | 2-3s |
+| `vv_transcript` | Extract captions/transcript without downloading the video | 3-5s |
+| `vv_setup` | Check your installation and see supported platforms | Instant |
 
 ---
 
@@ -86,7 +85,7 @@ Or add manually to `~/.claude/claude.json`:
 }
 ```
 
-Restart Claude Code. Type `sv_setup` to verify it's working.
+Restart Claude Code. Type `vv_setup` to verify it's working.
 
 ---
 
@@ -94,25 +93,25 @@ Restart Claude Code. Type `sv_setup` to verify it's working.
 
 ### Analyze a competitor's TikTok
 ```
-sv_watch https://www.tiktok.com/@[username]/video/[id]
+vv_watch https://www.tiktok.com/@[username]/video/[id]
 ```
 → Claude describes the hook, pacing, B-roll usage, CTA, and hashtag strategy
 
 ### Get a YouTube video summary without watching it
 ```
-sv_transcript https://www.youtube.com/watch?v=dQw4w9WgXcQ
+vv_transcript https://www.youtube.com/watch?v=dQw4w9WgXcQ
 ```
 → Full transcript with timestamps in seconds
 
 ### Reverse-engineer a viral Instagram Reel
 ```
-sv_watch https://www.instagram.com/reel/[id]/ fps=2
+vv_watch https://www.instagram.com/reel/[id]/
 ```
-→ Dense frame coverage — Claude spots every cut, text overlay, and transition
+→ Claude spots every cut, text overlay, and transition
 
 ### Research without watching
 ```
-sv_info https://www.youtube.com/watch?v=[id]
+vv_info https://www.youtube.com/watch?v=[id]
 ```
 → Title, creator, views, likes, hashtags, description — in 2 seconds
 
@@ -123,31 +122,12 @@ sv_info https://www.youtube.com/watch?v=[id]
 | Platform | Video type | Notes |
 |---|---|---|
 | YouTube | All videos, Shorts | Auto-captions extracted automatically |
-| Instagram | Reels, posts | Public only (use browser cookies for private) |
+| Instagram | Reels, posts | Public only |
 | TikTok | All videos | Watermark-free extraction |
 | Twitter / X | Video tweets | Public posts |
 | Facebook | Public videos | Public posts only |
 | Reddit | v.redd.it | Gallery support too |
 | Local files | MP4, MOV, AVI, MKV, WebM | Full local file support |
-
----
-
-## Why this is better than the original
-
-This is a rewrite of [claude-video-vision](https://github.com/jordanrendric/claude-video-vision) with major upgrades:
-
-| Feature | claude-video-vision | SocialVision MCP |
-|---|---|---|
-| YouTube | ✅ | ✅ |
-| Instagram | ❌ | ✅ |
-| TikTok | ❌ | ✅ |
-| Twitter/X | ❌ | ✅ |
-| Facebook | ❌ | ✅ |
-| Reddit | ❌ | ✅ |
-| Audio backend | Gemini/OpenAI/Whisper required | None needed — Claude IS the vision |
-| Transcript tool | ❌ | ✅ (no download needed) |
-| Platform metadata (hashtags, views, etc.) | ❌ | ✅ |
-| Setup complexity | 15+ steps | 3 steps |
 
 ---
 
