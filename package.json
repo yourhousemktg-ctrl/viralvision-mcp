@@ -1,10 +1,10 @@
 {
-  "name": "socialvision-mcp",
+  "name": "viralvision-mcp",
   "version": "1.0.0",
   "description": "MCP server that gives Claude eyes on any social video — YouTube, Instagram, TikTok",
   "type": "module",
   "bin": {
-    "socialvision-mcp": "./dist/index.js"
+    "viralvision-mcp": "./dist/index.js"
   },
   "scripts": {
     "build": "tsc",
