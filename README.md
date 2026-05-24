@@ -1,43 +1,32 @@
-# ViralVision MCP
+# ViralVision — Claude Skill
 
-**Give Claude eyes on any social video — YouTube, Instagram, TikTok, Twitter/X, Facebook, and more.**
+**Give Claude eyes on any social video. Type `/viralvision` and paste a URL.**
 
 Built by [Marc Illy](https://www.marcillyaiplaybook.it.com) · Free forever · MIT License
 
 ---
 
-## What it does
+## What it is
 
-Paste any social video URL into Claude Code. Claude downloads it, extracts frames, and can now see and analyze every second of the video — all from inside your Claude Code chat.
+ViralVision is a Claude Code skill. Once installed, you type `/viralvision` inside Claude Code to activate it — then paste any TikTok, YouTube, Instagram Reel, or Twitter/X link. Claude downloads the video, watches it frame by frame, and breaks down exactly why it performed.
 
-**No API keys needed beyond your Anthropic subscription.**
+No Gemini. No OpenAI. No extra API keys. Just Claude.
 
 ```
+You: /viralvision
 You: vv_watch https://www.tiktok.com/@garyvee/video/123456789
 
 Claude: [watches 47 frames across the 52-second video]
 
-"This TikTok opens with a question hook at 0:02:
-'Do you know what the #1 skill for 2026 is?'
-
-The middle section (0:15-0:35) shows B-roll of the office + cuts to
-face cam. The CTA at 0:48 is 'link in bio' pointing to a course..."
+"Opens with a question hook at 0:02 — strong pattern interrupt.
+Cuts every 1.8 seconds through the middle section.
+CTA hits at 0:48, 'link in bio', repeated twice.
+Viral score: 8/10 — pacing and hook formula are the key drivers..."
 ```
 
 ---
 
-## Tools included
-
-| Tool | What it does | Speed |
-|---|---|---|
-| `vv_watch` | Download + extract frames from any URL. Claude sees every frame. | 10-30s |
-| `vv_info` | Get video metadata without downloading (title, views, hashtags, creator) | 2-3s |
-| `vv_transcript` | Extract captions/transcript without downloading the video | 3-5s |
-| `vv_setup` | Check your installation and see supported platforms | Instant |
-
----
-
-## Install in 3 steps
+## Install in 4 steps
 
 ### Step 1 — Install dependencies
 
@@ -46,95 +35,79 @@ face cam. The CTA at 0:48 is 'link in bio' pointing to a course..."
 brew install yt-dlp ffmpeg
 ```
 
-**Windows:**
-```bash
-winget install yt-dlp.yt-dlp && winget install Gyan.FFmpeg
-```
-
 **Linux:**
 ```bash
 sudo apt install ffmpeg && pip install yt-dlp
 ```
 
-### Step 2 — Install the MCP server
+**Windows:**
+```bash
+winget install yt-dlp.yt-dlp && winget install Gyan.FFmpeg
+```
+
+### Step 2 — Clone and build
 
 ```bash
-git clone https://github.com/yourhousemktg-ctrl/viralvision-mcp
-cd viralvision-mcp
+git clone https://github.com/yourhousemktg-ctrl/viralvision-mcp ~/.claude/mcp/viralvision-mcp
+cd ~/.claude/mcp/viralvision-mcp
 npm install && npm run build
 ```
 
-### Step 3 — Add to Claude Code
-
-Run this command to add it to your Claude Code config:
+### Step 3 — Register with Claude Code
 
 ```bash
-claude mcp add viralvision-mcp node /path/to/viralvision-mcp/dist/index.js
+claude mcp add viralvision -- node ~/.claude/mcp/viralvision-mcp/dist/index.js
 ```
 
-Or add manually to `~/.claude/claude.json`:
+### Step 4 — Install the skill (slash command)
 
-```json
-{
-  "mcpServers": {
-    "viralvision-mcp": {
-      "command": "node",
-      "args": ["/path/to/viralvision-mcp/dist/index.js"]
-    }
-  }
-}
+```bash
+cp ~/.claude/mcp/viralvision-mcp/commands/viralvision.md ~/.claude/commands/viralvision.md
 ```
 
-Restart Claude Code. Type `vv_setup` to verify it's working.
+Restart Claude Code. Then type `/viralvision` — you're live.
 
 ---
 
-## Usage examples
+## How to use it
 
-### Analyze a competitor's TikTok
+Type `/viralvision` to activate the skill, then:
+
 ```
 vv_watch https://www.tiktok.com/@[username]/video/[id]
 ```
-→ Claude describes the hook, pacing, B-roll usage, CTA, and hashtag strategy
 
-### Get a YouTube video summary without watching it
-```
-vv_transcript https://www.youtube.com/watch?v=dQw4w9WgXcQ
-```
-→ Full transcript with timestamps in seconds
+Claude describes the hook, pacing, script structure, B-roll, cuts, and CTA.
 
-### Reverse-engineer a viral Instagram Reel
-```
-vv_watch https://www.instagram.com/reel/[id]/
-```
-→ Claude spots every cut, text overlay, and transition
+Then ask follow-up questions:
+- "What's the hook formula? Rate it 1-10."
+- "How does the pacing compare to top-performing Reels?"
+- "Write me a hook using the same pattern."
+- "What's the CTA and how could I improve it?"
 
-### Research without watching
-```
-vv_info https://www.youtube.com/watch?v=[id]
-```
-→ Title, creator, views, likes, hashtags, description — in 2 seconds
+---
+
+## Commands
+
+| Command | What it does | Speed |
+|---|---|---|
+| `vv_watch [URL]` | Download + extract frames. Claude sees every frame and analyzes the full video. | 10-30s |
+| `vv_transcript [URL]` | Full timestamped transcript. No download needed. | 3-5s |
+| `vv_info [URL]` | Views, likes, hashtags, creator, duration — without downloading. | 2-3s |
+| `vv_setup` | Check your installation status. | Instant |
 
 ---
 
 ## Supported platforms
 
-| Platform | Video type | Notes |
-|---|---|---|
-| YouTube | All videos, Shorts | Auto-captions extracted automatically |
-| Instagram | Reels, posts | Public only |
-| TikTok | All videos | Watermark-free extraction |
-| Twitter / X | Video tweets | Public posts |
-| Facebook | Public videos | Public posts only |
-| Reddit | v.redd.it | Gallery support too |
-| Local files | MP4, MOV, AVI, MKV, WebM | Full local file support |
+YouTube · TikTok · Instagram Reels · Twitter/X · Facebook · Reddit · local files
 
 ---
 
 ## License
 
-MIT — use it, fork it, ship it. Credit appreciated but not required.
+MIT — use it, fork it, ship it.
 
 ---
 
-*Built by Marc Illy · [AI Playbook 2026](https://www.marcillyaiplaybook.it.com) — the exact workflows I use to run my business with AI.*
+*Built by Marc Illy · [AI Playbook 2026](https://www.marcillyaiplaybook.it.com)*
